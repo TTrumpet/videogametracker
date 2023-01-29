@@ -134,5 +134,5 @@ def return_recommendations():
                 recommendations_list.append(
                     user_recommendations['Name'][random_num])
 
-    recommendations_list.to_json(
+    pd.DataFrame(recommendations_list).to_json(
         'ml_recommender/recommendations/rand10_user_recommendations.json')
