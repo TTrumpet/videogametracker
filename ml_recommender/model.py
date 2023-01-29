@@ -10,7 +10,8 @@ def create_model():
     # The following model should be pre-loaded #
     #------------------------------------------#
 
-    data = pd.read_csv('dataset/vgsales(5).csv', dtype=str, index_col=0)
+    data = pd.read_csv(
+        'ml_recommender/dataset/vgsales(5).csv', dtype=str, index_col=0)
     # print(data)
 
     # creating TF-IDF Matrix
@@ -35,5 +36,5 @@ def create_model():
     # Save model #
     #------------#
 
-    filename = 'recommender_model.joblib'
+    filename = 'ml_recommender/recommender_model.joblib'
     dump(cosine_sim, filename)

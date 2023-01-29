@@ -18,9 +18,10 @@ def get_recommendations(game_names_array):
 
     game_recommendations = []
 
-    data = pd.read_csv('dataset/vgsales(5).csv', dtype=str, index_col=0)
+    data = pd.read_csv(
+        'ml_recommender/dataset/vgsales(5).csv', dtype=str, index_col=0)
     indices = pd.Series(data.index, index=data['game-id'])
-    cosine_sim = load('recommender_model.joblib')
+    cosine_sim = load('ml_recommender/recommender_model.joblib')
 
     for i in range(len(game_names_array)):
         # preprocessing
@@ -75,7 +76,7 @@ def get_recommendations(game_names_array):
 
 
 def find_recommendations():
-    user_data = pd.read_json('user_data/api-res.json')
+    user_data = pd.read_json('ml_recommender/user_data/api-res.json')
 
     # preprocessing
     user_data['game-id'] = user_data['name'].str.replace(' ', "")
@@ -105,7 +106,8 @@ def find_recommendations():
     #   recommendations.to_csv('recommendations/user_recommendations.csv')
 
     # create and re-write recommendations
-    recommendations.to_csv('recommendations/user_recommendations.csv')
+    recommendations.to_csv(
+        'ml_recommender/recommendations/user_recommendations.csv')
 
 #-----------------------------------#
 # Code for creating recommendations #
@@ -116,7 +118,7 @@ def find_recommendations():
 
 def return_recommendations():
     user_recommendations = pd.read_csv(
-        'recommendations/user_recommendations.csv')
+        'ml_recommender/recommendations/user_recommendations.csv')
     recommendations_list = []
 
     # return 10 random recommendations, unless there are less than 10
@@ -133,4 +135,4 @@ def return_recommendations():
                     user_recommendations['Name'][random_num])
 
     recommendations_list.to_json(
-        'recommendations/rand10_user_recommendations.json')
+        'ml_recommender/recommendations/rand10_user_recommendations.json')
